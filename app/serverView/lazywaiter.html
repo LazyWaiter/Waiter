@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="windows-1252">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body ng-app="lazyWaiter">
+        <section ng-controller="ordersListCtrl">
+            <div id="main">
+                <ul id="product_list">
+                    <li ng-repeat="command in commands" >
+                        <div class="view">
+<!--                            <input type="checkbox" class="served" id="served"><label for="served"><i class="glyphicon glyphicon-send"></i></label>
+                            <input type="checkbox" class="paid" id="paid"><label for="paid"><i class="glyphicon glyphicon-euro"></i></label>-->
+                            <label>{{command.paid}}</label>
+                            <label>{{command.status}}</label>
+                            <label>{{command.table}}</label>
+                            <ul>
+                                <li ng-repeat="product in command.products">
+                                    <label>{{product.name}}</label>
+                                    <label>{{product.quantity}}</label>
+                                </li>
+                            </ul>
+                            <button class="delete"><i class="">Delete</i></button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+			<script src="../bower_components/angular/angular.js"></script>
+			<script src="../bower_components/angular-route/angular-route.js"></script>
+			<script type="text/javascript" src="lazywaiter.js"></script>
+			<script src="../components/version/version.js"></script>
+			<script src="../components/version/version-directive.js"></script>
+			<script src="../components/version/interpolate-filter.js"></script>
+    </body>
+</html>
