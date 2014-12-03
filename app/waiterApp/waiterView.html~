@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="waiterControllers" class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Waiter application</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../css/app.css">
+    </head>
+    <body ng-app="lazyWaiter">
+        <section ng-controler="ordersListCtrl">
+            <div id="main">
+                <ul id"product_list">
+                    <li  ng-repeat="order in orders">
+                        <ul>
+                            <li ng-repeat="product in order.value.detail">
+                                <p>{{product.name}} {{product.quantity}}</p>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+
+        <script src="../bower_components/angular/angular.js"></script>
+        <script src="../bower_components/angular-route/angular-route.js"></script>
+        <script src="../js/waiterControler.js"></script>
+    </body>
+</html>
