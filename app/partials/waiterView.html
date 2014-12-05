@@ -1,0 +1,31 @@
+
+
+
+<h1>Waiter app</h1>
+
+
+<accordion close-others="oneAtATime">
+    <accordion-group heading="{{order.value.tableNumber}} - {{order.value.createdAt | date:'dd/MM/yyyy'}}" ng-repeat="order in orders">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total Price</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody ng-class="{paid : order.value.sate | filter:'to_paid'}">
+                <tr ng-repeat="product in order.value.products">
+                    <td>{{product.name}}</td>
+                    <td>{{product.quantity}}</td>
+                    <td>{{product.price}}</td>
+                    <td>{{product.price * product.quantity}}</td>
+<td>{{order.value.status}}</td>
+                    <td><input type="checkbox" ng-click="updateStatePaid(order.value)"></td>
+                </tr>
+            </tbody>
+        </table>
+    </accordion-group>
+</accordion>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="lazyWaiter" class="no-js">
+<html lang="en" ng-app="waiterApp" class="no-js">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,40 +9,23 @@
         <link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
         <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css">
         <link rel="stylesheet" href="css/app.css">
-        <!--<script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>-->
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+        <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
     </head>
-    <body ng-controller="ordersListCtrl">
+    <body>
 
-        <section>
-            <header><h1>Waiter app</h1></header>
-            <table border="1">
-                <thead>
-                    <tr>
-                        <th>Number order</th>
-                        <th>Time order</th>
-                        <th>Paid order</th>
-                        <th>Given order</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="order in orders.value.detail">
-                        <td>{{order.name}}</td>
-                        <td>{{order.quantity}}</td>
-                        <td><input id="order_given" type="checkbox"></td>    
-                        <td><input id="order_paid" type="checkbox"></td> 
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-     
+        <div ng-view></div>
 
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="js/app.js"></script>
-    <script src="js/waiterControler.js"></script>
-    <!--<script src="components/version/version.js"></script>
-    <script src="components/version/version-directive.js"></script>
-    <script src="components/version/interpolate-filter.js"></script>
-    -->
+    <script src="js/controllers.js"></script>
+ <script src="components/version/version.js"></script>
+        <script src="components/version/version-directive.js"></script>
+        <script src="components/version/interpolate-filter.js"></script>
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+        <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 </body>
 </html>

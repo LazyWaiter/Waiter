@@ -1,0 +1,47 @@
+var waiterControllers = angular.module('waiterController', []);
+waiterControllers.controller('ordersListCtrl', ['$scope','$http','$interval',function ($scope, $http) {
+
+
+//$interval(function(){
+//getData($scope.orders)
+//},4000);
+
+
+    $scope.orders = [];
+    var promise = $http({method: 'GET', url: 'https://lazywaiter.couchappy.com/orders/_design/orders/_view/all'})
+    promise.success(function(data, status, headers, config) {
+        
+//$scope.orders = data.rows;
+        // Get orders with "to_delivery" state
+        //for(var i = 0, l = data.rows.length; i < l; i++) {
+           // if (data.rows[i].value.state === "to_delivery") {
+                //$scope.orders.push(data.rows[i]);
+           // }
+       // }
+$scope.orders = data.rows;
+    });
+
+
+
+$scope.updateStatePaid = function(order){
+order.state = 'to_prepare';
+console.log(order._id);
+ var index = $scope.orders.indexOf(order);
+
+        var promise = $http.put('https://lazywaiter.couchappy.com/orders/' + order._id, order);
+        promise.success(function(data, status, headers, config) {
+            console.log(data);
+            alert("state changed");
+            if (index !== -1) {
+                delete $scope.orders[index];
+            }
+        });
+        promise.error(function(data, status, headers, config) {
+order.state = 'to_delivery';
+            alert("error: Data not updated");
+        });
+};
+
+
+
+}]);
