@@ -15,6 +15,8 @@ This application allows to facilitate the orders commands take in a restaurant.
 Clone the repository with:
 ```sh
 $ git clone https://github.com/LazyWaiter/Waiter.git
+$ bower install bootstrap
+$bower install angular-bootstrap
 ```
 
 Run:

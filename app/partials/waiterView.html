@@ -4,8 +4,8 @@
 <h1>Waiter app</h1>
 
 
-<accordion close-others="oneAtATime">
-    <accordion-group heading="{{order.value.tableNumber}} - {{order.value.createdAt | date:'dd/MM/yyyy'}}" ng-repeat="order in orders">
+<accordion close-others="oneAtATime" ng-model="to_paid">
+    <accordion-group heading="Table number : {{order.value.tableNumber}} - {{order.value.createdAt | date:'dd/MM/yyyy'}}" ng-repeat="order in orders | filter:isToDelivery">
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -13,17 +13,17 @@
                     <th>Quantity</th>
                     <th>Price</th>
                     <th>Total Price</th>
-                    <th></th>
+                    <th><label for="changeState">Change state&nbsp;</label><input id="changeState" type="checkbox" ng-click="updateStatePaid(order.value)"></th>
                 </tr>
             </thead>
-            <tbody ng-class="{paid : order.value.sate | filter:'to_paid'}">
+            <tbody ng-class="{}">
                 <tr ng-repeat="product in order.value.products">
                     <td>{{product.name}}</td>
                     <td>{{product.quantity}}</td>
                     <td>{{product.price}}</td>
                     <td>{{product.price * product.quantity}}</td>
 <td>{{order.value.status}}</td>
-                    <td><input type="checkbox" ng-click="updateStatePaid(order.value)"></td>
+                    <td></td>
                 </tr>
             </tbody>
         </table>
