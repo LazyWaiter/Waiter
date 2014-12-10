@@ -1,13 +1,13 @@
 'use strict';
 
-var waiterApp = angular.module('waiterApp', ['ngRoute', 'waiterController','ui.bootstrap']);
+var waiterApp = angular.module('waiterApp', ['ngRoute', 'waiterController','waiterService','ui.bootstrap']);
 
 waiterApp.config(['$routeProvider',
 function($routeProvider) {    
     $routeProvider.
         when('/', {
             templateUrl: 'partials/waiterView.html',
-            controller: 'ordersListCtrl'
+            controller: 'ordersListCtrl',
         }).
         otherwise({
             redirectTo: '/'

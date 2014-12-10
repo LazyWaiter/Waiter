@@ -1,27 +1,11 @@
 var waiterControllers = angular.module('waiterController', []);
-waiterControllers.controller('ordersListCtrl', ['$scope','$http','$interval',function ($scope, $http) {
+
+waiterControllers.controller('ordersListCtrl', ['$scope','$http','$interval','waiterService',function ($scope, $http, waiterService) {
 
 
-//$interval(function(){
-//getData($scope.orders)
-//},4000);
+$scope.orders = waiterFactorys.getOrders();
 
-
-    $scope.orders = [];
-    var promise = $http({method: 'GET', url: 'https://lazywaiter.couchappy.com/orders/_design/orders/_view/all'})
-    promise.success(function(data, status, headers, config) {
-        
-//$scope.orders = data.rows;
-        // Get orders with "to_delivery" state
-        //for(var i = 0, l = data.rows.length; i < l; i++) {
-           // if (data.rows[i].value.state === "to_delivery") {
-                //$scope.orders.push(data.rows[i]);
-           // }
-       // }
-$scope.orders = data.rows;
-    });
-
- $scope.isToDelivery = function(order) {
+ /*$scope.isToDelivery = function(order) {
         return order.value.status === "to_delivery" ? true : false;
     };
 
@@ -44,6 +28,6 @@ order.status = 'to_delivery';
         });
 };
 
-
+*/
 
 }]);
