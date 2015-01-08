@@ -1,0 +1,5 @@
+Change log :
+	- récupération des commandes qui on le statut "to_delivery" dans un tableau
+	- possibilité de changer le statut de la commande en payer "to_paid"
+	- ajout d'une checkbox pour affiher le detail de la commande
+	- conception d'un design léger pour l'application
