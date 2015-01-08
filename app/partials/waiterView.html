@@ -7,33 +7,27 @@
 <section close-others="oneAtATime" ng-model="to_paid" ng-repeat="order in orderModel.orders | orderBy:orderModel.getTime:false">
 	<hearder>
 		<div>Table number : {{order.value.tableNumber}} - {{order.value.createdAt | date:'dd/MM/yyyy'}} - {{order.value.status}}</div>
-		<button>Detail order</button>
+		<label for="showDetail">Detail order</label><input type="checkbox" ng-model="checked" id="showDetail">
 		<button ng-click="orderModel.updateStatusToPaid(order)">Order paid !</button>
 	</header>
+	<div class="detail" ng-show="checked">
+		   <table class="table table-striped">
+            		<thead>
+                		<tr>
+                    			<th>Description</th>
+                    			<th>Quantity</th>
+                    			<th>Price</th>
+                    			<th>Total Price</th>
+                		</tr>
+            		</thead>
+            		<tbody>
+                		<tr ng-repeat="product in order.value.products">
+                    			<td>{{product.name}}</td>
+                    			<td>{{product.quantity}}</td>
+                    			<td>{{product.price}}</td>
+                    			<td>{{product.price * product.quantity}}</td>
+                		</tr>
+            		</tbody>
+        	</table>
+	</div>
 </section>
-
-<accordion close-others="oneAtATime" ng-model="to_paid">
-    <accordion-group heading="Table number : {{order.value.tableNumber}} - {{order.value.createdAt | date:'dd/MM/yyyy'}}" ng-repeat="order in orders | orderBy:getTime:false">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Description</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                    <th>Total Price</th>
-                    <th><label for="changeState">Change state&nbsp;</label><input id="changeState" type="checkbox" ng-click="orderModel.updateStatePaid(order)"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="product in order.value.products">
-                    <td>{{product.name}}</td>
-                    <td>{{product.quantity}}</td>
-                    <td>{{product.price}}</td>
-                    <td>{{product.price * product.quantity}}</td>
-		    <td>{{order.value.status}}</td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
-    </accordion-group>
-</accordion>

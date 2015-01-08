@@ -10,4 +10,6 @@ header button{
 float:right;margin:10px 10px;
 display:block;
 }
-
+.detail{width:100%;margin:20px 0;color:#787878;}
+.hidden{display:none}
+.show{display:block;}
