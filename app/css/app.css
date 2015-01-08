@@ -1,0 +1,13 @@
+hearder{
+
+}
+body{background-color: #A3B1B2 !important;}
+section{clear:both;border:1px solid #484848;background:#354b60;height:50px;margin:10px 0;}
+hearder div{
+float:left;margin:5px 10px;color:#fff;
+}
+header button{
+float:right;margin:10px 10px;
+display:block;
+}
+

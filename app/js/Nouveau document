@@ -1,0 +1,90 @@
+ /*
+         * Get the orders from couchDB
+         *
+         * @param array: it's where we push the data
+         */
+        getOrders: function ($scope) {
+            var promise = $http.get('https://lazywaiter.couchappy.com/orders/_design/orders/_view/all');
+
+            promise.success(function(data, status, headers, config) {
+                for (var i = 0, l = data.rows.length; i < l; i++) {
+                    // Push only the new entries
+                    if (data.rows[i].value.status === "to_delivery") {
+                        if (!checkIfAlreadyExist($scope.orders, data.rows[i])) {
+                            $scope.orders.push(data.rows[i]);
+                        }
+                    }
+                }
+            });
+            promise.error(function(data, status, headers, config) {
+                alert("error: Data not found");
+            });
+        },
+        /*
+         * Update status of an order
+         *
+         * @param $scope: The scope which we modify
+         * @param order: The order which want to update the status
+         */
+        updateOrderStatusToPaid: function($scope, order) {
+            var index = $scope.orders.indexOf(order);
+
+            var promise = $http.put('https://lazywaiter.couchappy.com/orders/' + order._id, order);
+            promise.success(function(data, status, headers, config) {
+                if (index !== -1) {
+                    delete $scope.orders[index];
+                }
+            });
+
+            promise.error(function(data, status, headers, config) {
+                order.status = "to_delivry";
+                alert("error: Data not updated");
+            });
+        }
+        
+        
+        
+        $scope.orders = [];
+ Order.getOrders($scope);
+ 
+ $scope.getTime = Order.getTime;
+
+$scope.updateStatePaid = function(order){
+	order.status = 'to_paid';
+	var index = $scope.orders.indexOf(order);
+
+
+
+        var promise = $http.put('https://lazywaiter.couchappy.com/orders/' + order._id, order);
+        promise.success(function(data, status, headers, config) {
+            alert("status changed (to_paid)");
+            if (index !== -1) {
+                delete $scope.orders[index];
+            }
+        });
+        promise.error(function(data, status, headers, config) {
+		order.status = 'to_delivery';
+    		alert("error: Data not updated");
+        });
+};
+
+ /*
+     * Function to add new order in the order scope array for test
+     *
+     */
+    $scope.addCommand = function() {
+        var orderTest = {};
+        orderTest.value= {
+            "tableNumber" : "42", // Number of the table
+            "createdAt" : new Date().getTime(), // date creation of the command
+            "products" : [ // all product in the command
+                {
+                    "name" : "Beer", // name of the product
+                    "quantity" : "1", // quantity for the product
+                    "price" : "3" //price of the product
+                }
+            ],
+            "status" : "to_delivery" // command status
+        };
+        $scope.orders.push(orderTest);
+    };
