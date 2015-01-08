@@ -1,16 +1,3 @@
-/*
-
-var waiterModel = angular.module('waiterService',[]).service('waiterService','$http', function($http){
-
-	var getOrders = function(){
-		$http({method: 'GET', url: 'https://lazywaiter.couchappy.com/orders/_design/orders/_view/all'}).success(function(data, status, headers, config) {
-			return orders = data.rows;
-    		});
-
-	}
-
-});*/
-
 /* Services */
 
 var waiterModel = angular.module('waiterModel', []);
@@ -67,11 +54,11 @@ waiterModel.factory('Order', [ '$http', function ($http) {
             promise.success(function(data, status, headers, config) {
                 for (var i = 0, l = data.rows.length; i < l; i++) {
                     // Push only the new entries
-                    if (data.rows[i].value.status === "to_delivery") {
+                    //if (data.rows[i].value.status === "to_delivery") {
                         if (!checkIfAlreadyExist(self.orders, data.rows[i])) {
                             self.orders.push(data.rows[i]);
                         }
-                    }
+                   // }
                 }
             });
             promise.error(function(data, status, headers, config) {
@@ -108,37 +95,4 @@ waiterModel.factory('Order', [ '$http', function ($http) {
     }
 }]);
 
-/*waiterModel.factory("ControlTime", [function() {
 
-    return {
-        /*
-         * get the order's date until now in minutes
-         * @param: The order which want to get the date
-         *
-         * @return: Integer (the order's date until now)
-         */
-       /* getOrderDateUntilNowInMinutes: function(order) {
-            var now = new Date().getTime();
-            var orderDate = order.value.createdAt;
-            return Math.floor((now - orderDate)/ 60000)
-        },
-
-        /*
-         * Check the control times for an order
-         * @param: the order which want to check the control times
-         *
-         * @return: string (green, orange or red)
-         */
-      /*  checkOrderControlTimes: function (order) {
-            var minutes = this.getOrderDateUntilNowInMinutes(order);
-            if (minutes > 10) {
-                return "red";
-            } else if (minutes <= 10 && minutes > 5) {
-                return "orange";
-            } else {
-                return "green";
-            }
-        }
-    }
-
-}]);*/
