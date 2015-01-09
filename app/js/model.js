@@ -23,6 +23,7 @@ waiterModel.factory('Order', [ '$http', function ($http) {
             var order =  {
                 "tableNumber" : 88, // Number of the table
                 "createdAt" : new Date().getTime(), // date creation of the command
+                "updateAt" : null,
                 "products" : [ // all product in the command
                     {
                         "name" : "Beer", // name of the product
@@ -69,10 +70,38 @@ waiterModel.factory('Order', [ '$http', function ($http) {
     
     //update status to paid
      updateStatusToPaid: function(order) {
+     if(order.value.status !== "to_paid"){
             var self = this;
             var index = this.orders.indexOf(order);
             console.log(order);
             order.value.status = "to_paid";
+            order.value.updateAt = new Date().getTime();
+
+            var promise = $http.put('https://lazywaiter.couchappy.com/orders/' + order.id, order.value);
+            promise.success(function(data, status, headers, config) {
+                if (index !== -1) {
+                    self.orders.splice(index, 1);
+                }
+            });
+
+            promise.error(function(data, status, headers, config) {
+                order.value.status = "to_served";
+                order.value.updateAt = null;
+                alert("error: Data not updated");
+            });
+           }else{
+           alert("this order is already paying !");
+           }
+        },
+        
+         //update status to serve
+     updateStatusToServed: function(order) {
+     if(order.value.status !== "to_served"){
+            var self = this;
+            var index = this.orders.indexOf(order);
+            console.log(order);
+            order.value.status = "to_served";
+            order.value.updateAt = new Date().getTime();
 
             var promise = $http.put('https://lazywaiter.couchappy.com/orders/' + order.id, order.value);
             promise.success(function(data, status, headers, config) {
@@ -83,8 +112,12 @@ waiterModel.factory('Order', [ '$http', function ($http) {
 
             promise.error(function(data, status, headers, config) {
                 order.value.status = "to_delivery";
+                order.value.updateAt = null;
                 alert("error: Data not updated");
             });
+           }else{
+           alert("this order is already served !");
+           }
         },
     
     	getTime: function(order) {

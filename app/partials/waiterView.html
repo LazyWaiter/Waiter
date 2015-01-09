@@ -1,18 +1,28 @@
 
-
-
+<div class="container">
+<div class="clearfix">
 <h1>Waiter app</h1>
 <button ng-click="orderModel.addOrder()">Add commande (to delivery)</button>
-<select ng-model="statusOrder">
+<select ng-model="statusOrder" value="to_delivery">
+	<option selected="selected" value="to_delivery" >Delivery</option>
+	<option value="to_served">Served</option>
 	<option value="to_paid">Paid</option>
-	<option value="to_delivery">Delivery</option>
-	<option value="to_prepare">Prepare</option>
 </select>
-<section close-others="oneAtATime" ng-model="to_paid" ng-repeat="order in orderModel.orders | orderBy:orderModel.getTime:false | filter: statusOrder">
-	<hearder>
-		<div>Table number : {{order.value.tableNumber}} - {{order.value.createdAt | date:'dd/MM/yyyy'}} - {{order.value.status}}</div>
-		<label for="showDetail">Detail order</label><input type="checkbox" ng-model="checked" id="showDetail">
-		<button ng-click="orderModel.updateStatusToPaid(order)">Order paid !</button>
+
+<section class="clearfix {{isPaid(order)}} {{isDelivery(order)}} {{isServed(order)}}" close-others="oneAtATime" ng-model="to_paid" ng-repeat="order in orderModel.orders | orderBy:orderModel.getTime:true | filter:statusOrder" ng-hide="order.value.status == 'to_prepare'">
+	<hearder class="" >
+		<div>
+		Table number : {{order.value.tableNumber}} /
+		/ Create at : {{order.value.createdAt | date:'hh:mm:ss'}} /
+		/ Status : {{order.value.status}} /
+		/ Update status at :  {{order.value.updateAt | date:'hh:mm:ss'}} 
+		</div>
+		<div class="btnAction">
+			<label for="showDetail">Detail order</label><input type="checkbox" ng-model="checked" id="showDetail">
+			<button ng-click="updateStatus(order)" class="{{isPaidShowBtn(order)}}">{{nameButton(order)}}</button>
+		
+    </div>
+		</div>
 	</header>
 	<div class="detail" ng-show="checked">
 		   <table class="table table-striped">
@@ -35,3 +45,5 @@
         	</table>
 	</div>
 </section>
+</div>
+</div>

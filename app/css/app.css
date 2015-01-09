@@ -1,15 +1,63 @@
 hearder{
 
 }
+.container{margin:0 auto;width:650px;}
 body{background-color: #A3B1B2 !important;}
-section{clear:both;border:1px solid #484848;background:#354b60;height:50px;margin:10px 0;}
+section{position:relative;clear:both;border:1px solid #484848;background:#354b60;margin:10px 0;}
 hearder div{
 float:left;margin:5px 10px;color:#fff;
 }
 header button{
 float:right;margin:10px 10px;
 display:block;
+color:#000;
 }
+.hidden{display:none;}
 .detail{width:100%;margin:20px 0;color:#787878;}
 .hidden{display:none}
 .show{display:block;}
+.btnAction{float:right;}
+
+.green{background-color: #2ecc71;
+}
+.yelow{background-color: #f1c40f;
+}
+.orange{
+background-color: #d35400;
+
+}
+button{color:#000 !important;}
+input[type="checkbox"]{
+width:25px;height:25px;margin:10px 5px;
+}
+.clearfix:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+ 
+.clearfix {
+    display: inline-block;
+}
+ 
+html[xmlns] .clearfix {
+    display: block;
+}
+ 
+* html .clearfix {
+    height: 1%;
+}
+
+.numberTab{left: 0;
+top: 0;
+background: #000;
+color: #fff;
+width: 25px;
+padding: 3px 4px;
+height: 25px;
+
+
+}
