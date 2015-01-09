@@ -9,7 +9,7 @@
 	<option value="to_paid">Paid</option>
 </select>
 
-<section class=" {{isPaid(order)}} {{isDelivery(order)}} {{isServed(order)}}" close-others="oneAtATime" ng-model="to_paid" ng-repeat="order in orderModel.orders | orderBy:orderModel.getTime:true | filter:statusOrder" ng-hide="order.value.status == 'to_prepare'">
+<section class="clearfix {{isPaid(order)}} {{isDelivery(order)}} {{isServed(order)}}" close-others="oneAtATime" ng-model="to_paid" ng-repeat="order in orderModel.orders | orderBy:orderModel.getTime:true | filter:statusOrder" ng-hide="order.value.status == 'to_prepare'">
 	<hearder class="" >
 		<div>
 		Table number : {{order.value.tableNumber}} /
